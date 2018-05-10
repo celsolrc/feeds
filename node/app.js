@@ -193,7 +193,7 @@ app.delete(apifeed + '/:id', function (req, res) {
 //PostsCollections
 //POST sem ID do feed (ERRO)
 app.post(apipost, function (req, res) {
-    res.status(400).json({ status: 2 });
+    res.status(400).json({ status: 2, id:0 });
 });
 //POST
 app.post(apipostid, function (req, res) {
@@ -215,7 +215,7 @@ app.post(apipostid, function (req, res) {
                 if (err) {
                     res.status(500).json({ status: 5 });
                 } else {
-                    res.json({ status: 1 });
+                    res.json({ status: 1, id: records.insertedIds[0] });
                 }
                 db.close();
             });
