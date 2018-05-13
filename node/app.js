@@ -1,30 +1,36 @@
 var express = require('express'),
     bodyParser = require('body-parser');
-MongoClient = require('mongodb').MongoClient,
-    objectId = require('mongodb').ObjectId;
+    MongoClient = require('mongodb').MongoClient,
+    objectId = require('mongodb').ObjectId,
+    cors = require('cors');
 
 let app = express();
-let port = 3000;
+let port = process.env.PORT || 3000;
 
-//var url = 'mongodb://testeapp:testeapp01@ds117590.lab.com:17590/my_blog_feed';
+// Para uso do mongodb com configuração no proprio fonte (MongoDBAtlas)
+//let url = 'mongodb+srv://testeapp:testeapp01@feedstest-4iant.mongodb.net/test?retryWrites=true';
+
+// Para uso do mongodb com configuração no sets do heroku
+//let url = process.env.MONGODB_URI;
+
+// Para uso do mongodb no localhost
 let url = 'mongodb://localhost:27017/';
+//let url = 'mongodb+srv://testeapp:testeapp01@feedstest-4iant.mongodb.net/test?retryWrites=true';
 
 let apifeed = '/api';
 
 let feedColl = 'feeds';
 let postColl = 'posts';
 
-
-//  var db = new mongodb.Db('dbFeeds',
-//                  new mongodb.Server(,
-//                  17590,{}),
-//                  {});
-
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
-app.listen(3000);
+app.listen(port);
+
+app.get('/', function (req, res) {
+    res.send({ msg: 'Ok' });
+});
 
 app.get('/', function (req, res) {
     res.send({ msg: 'Ok' });
