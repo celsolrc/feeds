@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Feeds</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="newItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-row *ngIf="feeds?.length == 0">
+        <ion-label>
+          Sem feeds
+        </ion-label>
+    </ion-row>
+
+        <ion-list inset *ngIf="feeds?.length>0" >
+          <ion-item-sliding *ngFor="let feed of feeds" >
+            <button ion-item (click)="feedSelected(feed)">
+              {{ feed.nome }}
+            </button>  
+            <ion-item-options>
+              <button ion-button icon-right (click)="editItem(feed)"><ion-icon name="create"></ion-icon> Editar</button>
+              <button ion-button color="danger" (click)="removeItem(feed)"><ion-icon name="trash"></ion-icon> Excluir</button>
+            </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>
